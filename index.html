@@ -4,7 +4,35 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Goitsemang Baloyi — Data Scientist & BI Specialist</title>
+<meta name="description" content="Portfolio of Goitsemang Baloyi — Data Science & BI student building ML fraud detection, churn prediction, credit risk analytics, SQL systems and forecasting projects. Available for WIL / Internship.">
+<meta name="theme-color" content="#080E1A">
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<!--
+  GOOGLE ANALYTICS 4
+  Replace GA_MEASUREMENT_ID below with your real Measurement ID (looks like "G-XXXXXXXXXX").
+  Get one at analytics.google.com → Admin → Create Property → Data Streams → Web → copy the Measurement ID.
+  Until you replace it, this script deliberately does nothing (see the guard below) so it never
+  throws console errors or reports fake data.
+-->
+<script>
+  window.GA_MEASUREMENT_ID = "GA_MEASUREMENT_ID"; // <-- paste your real "G-XXXXXXXXXX" here
+</script>
+<script>
+(function(){
+  if(window.GA_MEASUREMENT_ID === "GA_MEASUREMENT_ID") return; // not configured yet — skip loading
+  var s=document.createElement('script');
+  s.async=true; s.src="https://www.googletagmanager.com/gtag/js?id="+window.GA_MEASUREMENT_ID;
+  document.head.appendChild(s);
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  window.gtag = gtag;
+  gtag('js', new Date());
+  gtag('config', window.GA_MEASUREMENT_ID);
+})();
+function trackEvent(category, action, label){
+  if(typeof gtag === 'function'){ gtag('event', action, {event_category: category, event_label: label}); }
+}
+</script>
 <style>
 :root{
   --navy:#080E1A;--navy2:#0D1B2E;--navy3:#142238;
@@ -12,10 +40,27 @@
   --gold:#F0A500;--orange:#E8670A;
   --cream:#F0EBE0;--warm:#C8C0B0;--muted:#6B7A8D;
   --border:rgba(20,212,218,0.15);
+  --card-shadow:rgba(0,0,0,.35);
+}
+html[data-theme="light"]{
+  --navy:#F5F2EA;--navy2:#EDE8DC;--navy3:#E3DCCC;
+  --cream:#12181F;--warm:#3A3A3A;--muted:#5C6773;
+  --border:rgba(12,155,159,0.22);
+  --card-shadow:rgba(20,30,20,.08);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 html{scroll-behavior:smooth;}
-body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--cream);overflow-x:hidden;cursor:none;}
+body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--cream);overflow-x:hidden;cursor:none;transition:background .4s ease,color .4s ease;}
+a:focus-visible,button:focus-visible,[tabindex]:focus-visible{outline:2px solid var(--teal2);outline-offset:3px;}
+.skip-link{position:absolute;left:1rem;top:-60px;background:var(--teal2);color:var(--navy);font-family:'DM Mono',monospace;font-size:.75rem;padding:.7rem 1.2rem;z-index:999;transition:top .2s;}
+.skip-link:focus{top:1rem;}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms !important;animation-iteration-count:1 !important;transition-duration:.001ms !important;scroll-behavior:auto !important;}
+}
+@media(hover:none),(pointer:coarse){
+  body{cursor:auto;}
+  #cur,#cur-ring{display:none;}
+}
 
 #cur{width:10px;height:10px;background:var(--teal3);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;mix-blend-mode:difference;}
 #cur-ring{width:40px;height:40px;border:1px solid var(--teal2);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;opacity:.4;transition:transform .4s cubic-bezier(.25,.46,.45,.94);}
@@ -23,12 +68,59 @@ body{font-family:'DM Sans',sans-serif;background:var(--navy);color:var(--cream);
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;justify-content:space-between;align-items:center;padding:1.5rem 5rem;transition:all .4s;}
 nav.scrolled{background:rgba(8,14,26,0.92);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:1rem 5rem;}
+html[data-theme="light"] nav.scrolled{background:rgba(245,242,234,0.92);}
 .nav-logo{font-family:'Syne',sans-serif;font-weight:800;font-size:1.2rem;background:linear-gradient(135deg,var(--teal2),var(--teal3));-webkit-background-clip:text;-webkit-text-fill-color:transparent;text-decoration:none;}
+.nav-right{display:flex;align-items:center;gap:2.5rem;}
 .nav-links{display:flex;gap:2.5rem;list-style:none;}
 .nav-links a{font-family:'DM Mono',monospace;font-size:.72rem;color:var(--warm);text-decoration:none;letter-spacing:.1em;opacity:.65;transition:all .2s;position:relative;}
 .nav-links a::after{content:'';position:absolute;bottom:-4px;left:0;right:0;height:1px;background:var(--teal2);transform:scaleX(0);transform-origin:left;transition:transform .3s;}
 .nav-links a:hover{opacity:1;color:var(--teal2);}
 .nav-links a:hover::after{transform:scaleX(1);}
+.theme-toggle{background:transparent;border:1px solid var(--border);color:var(--teal2);width:34px;height:34px;border-radius:50%;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .25s;flex-shrink:0;}
+.theme-toggle:hover{background:rgba(20,212,218,.1);border-color:var(--teal2);}
+.nav-burger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;padding:.4rem;z-index:210;}
+.nav-burger span{width:22px;height:2px;background:var(--cream);transition:all .3s;}
+.nav-burger.open span:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.nav-burger.open span:nth-child(2){opacity:0;}
+.nav-burger.open span:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* AVAILABILITY BADGE */
+.status-badge{display:inline-flex;align-items:center;gap:.55rem;font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.08em;color:var(--teal2);background:rgba(20,212,218,.07);border:1px solid var(--border);padding:.5rem 1rem;margin-bottom:1.5rem;clip-path:polygon(0 0,calc(100% - 8px) 0,100% 8px,100% 100%,8px 100%,0 calc(100% - 8px));opacity:0;animation:fadeUp .8s .1s forwards;}
+.status-dot{width:7px;height:7px;border-radius:50%;background:#3DDC84;flex-shrink:0;animation:statusPulse 2s infinite;}
+@keyframes statusPulse{0%,100%{box-shadow:0 0 0 0 rgba(61,220,132,.5);}50%{box-shadow:0 0 0 5px rgba(61,220,132,0);}}
+
+/* BACK TO TOP */
+.to-top{position:fixed;bottom:1.75rem;right:1.75rem;width:44px;height:44px;background:var(--teal);color:var(--navy);border:none;cursor:pointer;z-index:150;display:flex;align-items:center;justify-content:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:all .3s;clip-path:polygon(0 0,calc(100% - 9px) 0,100% 9px,100% 100%,9px 100%,0 calc(100% - 9px));}
+.to-top.show{opacity:1;visibility:visible;transform:translateY(0);}
+.to-top:hover{background:var(--teal2);}
+
+/* GITHUB ACTIVITY */
+.gh-activity{padding:4rem 5rem 5rem;background:var(--navy);text-align:center;}
+.gh-activity img{max-width:100%;border:1px solid var(--border);border-radius:4px;padding:1rem;background:var(--navy2);}
+
+/* CASE STUDY MODAL */
+.modal-overlay{position:fixed;inset:0;background:rgba(4,8,15,.82);backdrop-filter:blur(6px);z-index:500;display:flex;align-items:flex-start;justify-content:center;padding:4rem 1.5rem;opacity:0;visibility:hidden;transition:opacity .3s ease;overflow-y:auto;}
+.modal-overlay.open{opacity:1;visibility:visible;}
+.modal-box{background:var(--navy2);border:1px solid var(--border);max-width:760px;width:100%;padding:3rem;position:relative;transform:translateY(20px);transition:transform .35s cubic-bezier(.25,.46,.45,.94);clip-path:polygon(0 0,calc(100% - 24px) 0,100% 24px,100% 100%,24px 100%,0 calc(100% - 24px));}
+.modal-overlay.open .modal-box{transform:translateY(0);}
+.modal-close{position:absolute;top:1.5rem;right:1.5rem;width:38px;height:38px;background:rgba(240,235,224,.08);border:1px solid var(--border);color:var(--cream);cursor:pointer;font-size:1rem;border-radius:50%;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.modal-close:hover{background:var(--teal);border-color:var(--teal);}
+.modal-tag{font-family:'DM Mono',monospace;font-size:.65rem;letter-spacing:.15em;text-transform:uppercase;color:var(--teal2);margin-bottom:.75rem;}
+.modal-title{font-family:'Syne',sans-serif;font-weight:800;font-size:1.7rem;color:var(--cream);line-height:1.15;margin-bottom:1.25rem;padding-right:2.5rem;}
+.modal-img{width:100%;max-height:320px;object-fit:cover;border:1px solid var(--border);margin-bottom:1.75rem;}
+.modal-section{margin-bottom:1.75rem;}
+.modal-section h4{font-family:'DM Mono',monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--teal);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem;}
+.modal-section h4::before{content:'';width:16px;height:1px;background:var(--teal);}
+.modal-section p{font-size:.88rem;line-height:1.85;color:var(--warm);font-weight:300;}
+.modal-list{list-style:none;display:flex;flex-direction:column;gap:.65rem;}
+.modal-list li{font-size:.86rem;line-height:1.7;color:var(--warm);font-weight:300;padding-left:1.3rem;position:relative;}
+.modal-list li::before{content:'→';position:absolute;left:0;color:var(--teal2);font-size:.75rem;}
+.modal-metrics{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:1rem;}
+.modal-metric{background:rgba(20,212,218,.05);border:1px solid var(--border);padding:1rem;text-align:center;}
+.modal-metric-val{font-family:'Syne',sans-serif;font-weight:800;font-size:1.4rem;color:var(--orange);}
+.modal-metric-label{font-family:'DM Mono',monospace;font-size:.58rem;color:var(--muted);letter-spacing:.06em;text-transform:uppercase;margin-top:.25rem;}
+.modal-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-bottom:1.75rem;}
+.modal-links{display:flex;gap:1rem;flex-wrap:wrap;margin-top:2rem;padding-top:1.75rem;border-top:1px solid var(--border);}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:0 5rem;position:relative;overflow:hidden;}
@@ -82,7 +174,7 @@ nav.scrolled{background:rgba(8,14,26,0.92);backdrop-filter:blur(20px);border-bot
 .stat-sub{font-size:.78rem;color:var(--warm);font-weight:300;margin-top:.2rem;}
 
 /* ABOUT */
-.about{background:var(--cream);color:#1A1A1A;padding:8rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start;position:relative;overflow:hidden;}
+.about{background:#F0EBE0;color:#1A1A1A;padding:8rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start;position:relative;overflow:hidden;}
 .about-wm{position:absolute;font-family:'Syne',sans-serif;font-size:13rem;font-weight:800;color:rgba(13,27,46,.04);right:-2rem;top:-1rem;line-height:1;pointer-events:none;user-select:none;}
 
 /* Profile photo */
@@ -110,6 +202,15 @@ nav.scrolled{background:rgba(8,14,26,0.92);backdrop-filter:blur(20px);border-bot
 .skill-pills{display:flex;flex-wrap:wrap;gap:.45rem;}
 .skill-pill{font-family:'DM Mono',monospace;font-size:.7rem;padding:.38rem .85rem;background:#080E1A;color:var(--teal2);border:1px solid rgba(20,212,218,.2);letter-spacing:.04em;transition:all .25s;cursor:default;clip-path:polygon(0 0,calc(100% - 6px) 0,100% 6px,100% 100%,6px 100%,0 calc(100% - 6px));}
 .skill-pill:hover{background:var(--teal);color:var(--cream);border-color:var(--teal);transform:translateY(-2px);}
+
+/* PIPELINE SIGNATURE STRIP */
+.pipeline-strip{background:var(--navy2);border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:2.5rem 5rem;overflow-x:auto;}
+.pipeline-inner{display:flex;align-items:center;justify-content:center;gap:1.5rem;min-width:max-content;margin:0 auto;}
+.pipe-stage{text-align:center;min-width:130px;}
+.pipe-num{font-family:'DM Mono',monospace;font-size:.65rem;color:var(--teal);letter-spacing:.1em;}
+.pipe-name{font-family:'Syne',sans-serif;font-weight:700;font-size:.85rem;color:var(--cream);margin-top:.35rem;}
+.pipe-tools{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--muted);margin-top:.3rem;letter-spacing:.02em;}
+.pipe-arrow{color:var(--teal2);font-size:1.1rem;opacity:.5;flex-shrink:0;}
 
 /* PROJECTS */
 .projects{padding:8rem 5rem;background:var(--navy);position:relative;overflow:hidden;}
@@ -149,13 +250,13 @@ nav.scrolled{background:rgba(8,14,26,0.92);backdrop-filter:blur(20px);border-bot
 .btn-see-more:hover{background:rgba(20,212,218,.12);transform:translateY(-3px);box-shadow:0 12px 30px rgba(12,155,159,.2);}
 
 /* EXPERIENCE */
-.experience{background:var(--cream);color:#1A1A1A;padding:8rem 5rem;position:relative;overflow:hidden;}
+.experience{background:#F0EBE0;color:#1A1A1A;padding:8rem 5rem;position:relative;overflow:hidden;}
 .exp-wm{position:absolute;font-family:'Syne',sans-serif;font-size:16rem;font-weight:800;color:rgba(13,27,46,.03);bottom:-4rem;right:-2rem;line-height:1;pointer-events:none;user-select:none;}
 .exp-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;margin-top:4rem;}
 .timeline{display:flex;flex-direction:column;}
 .tl-item{padding:1.4rem 0 1.4rem 1.75rem;border-left:1px solid rgba(12,155,159,.2);position:relative;cursor:default;transition:padding-left .3s;}
 .tl-item:hover{padding-left:2.2rem;}
-.tl-dot{position:absolute;left:-5px;top:1.6rem;width:9px;height:9px;background:var(--teal);border-radius:50%;border:2px solid var(--cream);transition:background .3s,transform .3s;}
+.tl-dot{position:absolute;left:-5px;top:1.6rem;width:9px;height:9px;background:var(--teal);border-radius:50%;border:2px solid #F0EBE0;transition:background .3s,transform .3s;}
 .tl-item:hover .tl-dot{background:var(--teal2);transform:scale(1.4);}
 .tl-date{font-family:'DM Mono',monospace;font-size:.6rem;color:var(--teal);letter-spacing:.1em;margin-bottom:.3rem;}
 .tl-role{font-family:'Syne',sans-serif;font-size:.95rem;font-weight:700;color:#080E1A;margin-bottom:.2rem;}
@@ -182,10 +283,10 @@ nav.scrolled{background:rgba(8,14,26,0.92);backdrop-filter:blur(20px);border-bot
 .cert-tasks{font-size:.7rem;color:rgba(200,192,176,.6);font-weight:300;margin-top:.35rem;line-height:1.5;position:relative;z-index:1;}
 
 /* CONTACT */
-.contact{background:var(--cream);color:#1A1A1A;padding:8rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start;position:relative;overflow:hidden;}
+.contact{background:#F0EBE0;color:#1A1A1A;padding:8rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:7rem;align-items:start;position:relative;overflow:hidden;}
 .contact-bg{position:absolute;bottom:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(12,155,159,.07) 0%,transparent 70%);pointer-events:none;}
 .contact-links{display:flex;flex-direction:column;gap:.8rem;margin-top:1.6rem;}
-.contact-link{display:flex;align-items:center;gap:1rem;padding:1rem 1.35rem;background:#080E1A;color:var(--cream);text-decoration:none;font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.05em;transition:all .3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));position:relative;overflow:hidden;}
+.contact-link{display:flex;align-items:center;gap:1rem;padding:1rem 1.35rem;background:#080E1A;color:#F0EBE0;text-decoration:none;font-family:'DM Mono',monospace;font-size:.73rem;letter-spacing:.05em;transition:all .3s;clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px));position:relative;overflow:hidden;}
 .contact-link::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--teal2);transform:scaleY(0);transition:transform .3s;}
 .contact-link:hover{transform:translateX(7px);background:#0D1B2E;color:var(--teal2);}
 .contact-link:hover::before{transform:scaleY(1);}
@@ -214,35 +315,72 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
 ::-webkit-scrollbar-track{background:var(--navy);}
 ::-webkit-scrollbar-thumb{background:linear-gradient(var(--teal),var(--teal2));border-radius:2px;}
 
+/* TABLET */
+@media(max-width:1024px){
+  nav,nav.scrolled{padding:1.2rem 2.5rem;}
+  .hero,.about,.projects,.experience,.certs,.contact,.gh-activity{padding:6rem 2.5rem;}
+  .exp-grid{gap:3rem;}
+  .certs-grid{grid-template-columns:repeat(3,1fr);}
+}
+
+/* MOBILE NAV + LAYOUT */
 @media(max-width:900px){
   nav,nav.scrolled{padding:1.2rem 1.5rem;}
-  .hero,.about,.projects,.experience,.certs,.contact{padding:5rem 1.5rem;}
+  .hero,.about,.projects,.experience,.certs,.contact,.gh-activity{padding:5rem 1.5rem;}
+  .pipeline-strip{padding:2rem 1.5rem;}
   .hero{padding-top:8rem;}
   .about,.contact,.exp-grid{grid-template-columns:1fr;gap:3rem;}
   .proj-featured,.proj-grid-2{grid-template-columns:1fr;}
   .certs-grid{grid-template-columns:1fr 1fr;gap:.75rem;}
   .stats-bar{grid-template-columns:1fr 1fr;padding:2rem 1.5rem;}
   .stat-item:nth-child(2){border-right:none;}
-  footer{padding:1.5rem;flex-direction:column;gap:.5rem;text-align:center;}
+  footer{padding:1.5rem;flex-direction:column;gap:1rem;text-align:center;}
+  footer > div:last-child{justify-content:center;}
   body{cursor:auto;}
   #cur,#cur-ring{display:none;}
+
+  .nav-burger{display:flex;}
+  .nav-links{position:fixed;top:0;right:0;height:100vh;width:min(78vw,320px);background:rgba(8,14,26,.98);backdrop-filter:blur(20px);flex-direction:column;justify-content:center;align-items:flex-start;gap:2rem;padding:2rem 2.5rem;transform:translateX(100%);transition:transform .4s cubic-bezier(.25,.46,.45,.94);z-index:205;border-left:1px solid var(--border);}
+  html[data-theme="light"] .nav-links{background:rgba(245,242,234,.98);}
+  .nav-links.open{transform:translateX(0);}
+  .nav-links a{font-size:.85rem;opacity:1;}
+}
+
+/* SMALL PHONES */
+@media(max-width:480px){
+  .hero-name{font-size:clamp(2.5rem,12vw,3.5rem);}
+  .hero-ctas{flex-direction:column;align-items:stretch;}
+  .hero-ctas .btn{text-align:center;}
+  .stats-bar{grid-template-columns:1fr;}
+  .stat-item{border-right:none !important;border-bottom:1px solid var(--border);}
+  .stat-item:last-child{border-bottom:none;}
+  .certs-grid{grid-template-columns:1fr;}
+  .to-top{bottom:1.25rem;right:1.25rem;width:38px;height:38px;}
+  .role-chip{font-size:.62rem;padding:.35rem .7rem;}
 }
 </style>
 </head>
 <body>
 
+<a href="#home" class="skip-link">Skip to content</a>
 <div id="cur"></div>
 <div id="cur-ring"></div>
 
 <nav id="nav">
   <a href="#" class="nav-logo">GB.</a>
-  <ul class="nav-links">
-    <li><a href="#about">About</a></li>
-    <li><a href="#projects">Projects</a></li>
-    <li><a href="#experience">Experience</a></li>
-    <li><a href="#certs">Certifications</a></li>
-    <li><a href="#contact">Contact</a></li>
-  </ul>
+  <div class="nav-right">
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#certs">Certifications</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="images/Goitsemang_Baloyi_CV.pdf" target="_blank" style="color:var(--teal2);opacity:1;">CV ↗</a></li>
+    </ul>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle light and dark theme" title="Toggle theme">☽</button>
+    <button class="nav-burger" id="navBurger" aria-label="Open navigation menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -252,7 +390,8 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
   <div class="orb orb1"></div><div class="orb orb2"></div><div class="orb orb3"></div>
   <div class="particles" id="particles"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow"><span class="eyebrow-line"></span><span class="eyebrow-text">Data Science · Business Intelligence · Machine Learning</span></div>
+    <div class="status-badge"><span class="status-dot"></span>Available for WIL / Internship</div>
+    <div class="hero-eyebrow"><span class="eyebrow-line"></span><span class="eyebrow-text" id="eyebrowText">Data Science · Business Intelligence · Machine Learning</span></div>
     <h1 class="hero-name">Goitse<span class="acc">mang</span><br>Baloyi</h1>
     <div class="hero-roles">
       <span class="role-chip">Python</span><span class="role-chip">SQL</span>
@@ -263,13 +402,14 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
     <p class="hero-desc">I build end-to-end data solutions — from raw datasets to dashboards that drive real business decisions. 3rd-year Data Science & BI student at Belgium Campus ITversity, seeking a WIL programme or an Internship</p>
     <div class="hero-ctas">
       <a href="#projects" class="btn btn-primary">View My Projects</a>
+      <a href="images/Goitsemang_Baloyi_CV.pdf" download class="btn btn-ghost" id="cvDownloadBtn" onclick="trackEvent('engagement','cv_download','hero')">Download CV</a>
       <a href="#contact" class="btn btn-ghost">Let's Connect</a>
     </div>
   </div>
   <div class="ticker">
     <div class="ticker-inner">
-      <span class="hl">FRAUD DETECTION</span><span>·</span><span>CUSTOMER CHURN PREDICTION</span><span>·</span><span class="hl">CREDIT RISK ANALYTICS</span><span>·</span><span>SALES FORECASTING</span><span>·</span><span class="hl">SQL DATABASE DESIGN</span><span>·</span><span>TABLEAU DASHBOARDS</span><span>·</span><span class="hl">EXPLAINABLE AI · SHAP</span><span>·</span><span>FEATURE ENGINEERING</span><span>·</span><span class="hl">DATA WAREHOUSING · ETL</span><span>·</span><span>POWER BI · Python · XBOOST</span><span>·</span>
-      <span class="hl">FRAUD DETECTION</span><span>·</span><span>CUSTOMER CHURN PREDICTION</span><span>·</span><span class="hl">CREDIT RISK ANALYTICS</span><span>·</span><span>SALES FORECASTING</span><span>·</span><span class="hl">SQL DATABASE DESIGN</span><span>·</span><span>TABLEAU DASHBOARDS</span><span>·</span><span class="hl">EXPLAINABLE AI · SHAP</span><span>·</span><span>FEATURE ENGINEERING</span><span>·</span><span class="hl">DATA WAREHOUSING · ETL</span><span>·</span><span>POWER BI · Python · XBOOST</span><span>·</span>
+      <span class="hl">FRAUD DETECTION</span><span>·</span><span>CUSTOMER CHURN PREDICTION</span><span>·</span><span class="hl">CREDIT RISK ANALYTICS</span><span>·</span><span>SALES FORECASTING</span><span>·</span><span class="hl">SQL DATABASE DESIGN</span><span>·</span><span>TABLEAU DASHBOARDS</span><span>·</span><span class="hl">EXPLAINABLE AI · SHAP</span><span>·</span><span>FEATURE ENGINEERING</span><span>·</span><span class="hl">DATA WAREHOUSING · ETL</span><span>·</span><span>POWER BI · Python · XGBOOST</span><span>·</span>
+      <span class="hl">FRAUD DETECTION</span><span>·</span><span>CUSTOMER CHURN PREDICTION</span><span>·</span><span class="hl">CREDIT RISK ANALYTICS</span><span>·</span><span>SALES FORECASTING</span><span>·</span><span class="hl">SQL DATABASE DESIGN</span><span>·</span><span>TABLEAU DASHBOARDS</span><span>·</span><span class="hl">EXPLAINABLE AI · SHAP</span><span>·</span><span>FEATURE ENGINEERING</span><span>·</span><span class="hl">DATA WAREHOUSING · ETL</span><span>·</span><span>POWER BI · Python · XGBOOST</span><span>·</span>
     </div>
   </div>
 </section>
@@ -346,6 +486,21 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
   </div>
 </section>
 
+<!-- PIPELINE SIGNATURE STRIP -->
+<div class="pipeline-strip">
+  <div class="pipeline-inner">
+    <div class="pipe-stage reveal"><span class="pipe-num">01</span><p class="pipe-name">Ingest & Clean</p><p class="pipe-tools">Pandas · SQL · Excel</p></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-stage reveal"><span class="pipe-num">02</span><p class="pipe-name">Engineer & Model</p><p class="pipe-tools">Scikit-Learn · XGBoost</p></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-stage reveal"><span class="pipe-num">03</span><p class="pipe-name">Explain</p><p class="pipe-tools">SHAP · Feature Importance</p></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-stage reveal"><span class="pipe-num">04</span><p class="pipe-name">Visualise</p><p class="pipe-tools">Tableau · Power BI</p></div>
+    <div class="pipe-arrow">→</div>
+    <div class="pipe-stage reveal"><span class="pipe-num">05</span><p class="pipe-name">Deliver Insight</p><p class="pipe-tools">Dashboards · Reports</p></div>
+  </div>
+</div>
+
 <!-- PROJECTS -->
 <section class="projects" id="projects">
   <div class="proj-bg"></div>
@@ -379,6 +534,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
         <div class="pm"><span class="pmv">3</span><span class="pmk">Models</span></div>
       </div>
       <a href="https://github.com/G-Baloyi/Bank-Transaction-Fraud-Detection-System" target="_blank" class="proj-link">View on GitHub →</a>
+      <button class="proj-link case-study-btn" onclick="openCaseStudy('fraud')" style="background:none;border:none;cursor:pointer;font:inherit;">More About This Project →</button>
     </div>
   </div>
 
@@ -399,6 +555,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
         <div class="pm"><span class="pmv">2</span><span class="pmk">ML Targets</span></div>
       </div>
       <a href="https://github.com/G-Baloyi/Bank-Customer-churn-and-CLV-Prediction" target="_blank" class="proj-link">View on GitHub →</a>
+      <button class="proj-link case-study-btn" onclick="openCaseStudy('churn')" style="background:none;border:none;cursor:pointer;font:inherit;">More About This Project →</button>
     </div>
     <div class="proj-card reveal">
       <div class="corner"></div>
@@ -414,7 +571,11 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
         <div class="pm"><span class="pmv">1K</span><span class="pmk">Customers</span></div>
         <div class="pm"><span class="pmv">2</span><span class="pmk">Live Dashboards</span></div>
       </div>
-      <a href="https://github.com/G-Baloyi/Customer-Credit-Risk-and-Financial-Behavior-Analysis" target="_blank" class="proj-link">View on GitHub →</a>
+      <div style="display:flex;gap:1.25rem;flex-wrap:wrap;">
+        <a href="https://github.com/G-Baloyi/Customer-Credit-Risk-and-Financial-Behavior-Analysis" target="_blank" class="proj-link">View on GitHub →</a>
+        <a href="https://g-baloyi.github.io/Customer-Credit-Risk-and-Financial-Behavior-Analysis/" target="_blank" class="proj-link">Live Dashboards →</a>
+        <button class="proj-link case-study-btn" onclick="openCaseStudy('credit')" style="background:none;border:none;cursor:pointer;font:inherit;">More About This Project →</button>
+      </div>
     </div>
   </div>
 
@@ -435,6 +596,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
         <div class="pm"><span class="pmv">RBAC</span><span class="pmk">Security</span></div>
       </div>
       <a href="https://github.com/G-Baloyi/SoyezJolie-Database-System" target="_blank" class="proj-link">View on GitHub →</a>
+      <button class="proj-link case-study-btn" onclick="openCaseStudy('soyez')" style="background:none;border:none;cursor:pointer;font:inherit;">More About This Project →</button>
     </div>
     <div class="proj-card reveal">
       <div class="corner"></div>
@@ -451,6 +613,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
         <div class="pm"><span class="pmv">TS</span><span class="pmk">Forecasting</span></div>
       </div>
       <a href="https://github.com/G-Baloyi/Superstore_Sales_Forecast" target="_blank" class="proj-link">View on GitHub →</a>
+      <button class="proj-link case-study-btn" onclick="openCaseStudy('superstore')" style="background:none;border:none;cursor:pointer;font:inherit;">More About This Project →</button>
     </div>
   </div>
 
@@ -548,6 +711,7 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
       <a href="https://linkedin.com/in/goitsemang-baloyi" target="_blank" class="contact-link"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>linkedin.com/in/goitsemang-baloyi</a>
       <a href="https://github.com/G-Baloyi" target="_blank" class="contact-link"><svg fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg>github.com/G-Baloyi</a>
       <a href="tel:+27796295517" class="contact-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>(+27) 079 629 5517</a>
+      <a href="images/Goitsemang_Baloyi_CV.pdf" target="_blank" class="contact-link"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4v12m0 0l-4-4m4 4l4-4M4 20h16"/></svg>Download my CV (PDF)</a>
     </div>
   </div>
   <div class="contact-panel reveal-r">
@@ -564,9 +728,27 @@ footer p{font-family:'DM Mono',monospace;font-size:.63rem;color:var(--muted);let
   </div>
 </section>
 
+<section class="gh-activity reveal">
+  <p class="sec-tag" style="justify-content:center;">// github activity</p>
+  <img src="https://github-readme-activity-graph.vercel.app/graph?username=G-Baloyi&theme=react-dark&hide_border=true&bg_color=0D1B2E&color=C8C0B0&line=14D4DA&point=F0A500&area=true&area_color=0C9B9F" alt="Goitsemang Baloyi's GitHub contribution activity graph" loading="lazy" onerror="this.parentElement.innerHTML='<p style=\'color:var(--muted);font-family:DM Mono,monospace;font-size:.75rem;\'>GitHub activity graph unavailable — view live at <a href=\'https://github.com/G-Baloyi\' target=\'_blank\' style=\'color:var(--teal2);\'>github.com/G-Baloyi</a></p>'">
+</section>
+
+<div class="modal-overlay" id="caseStudyModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+  <div class="modal-box" id="modalBox"></div>
+</div>
+
+<button class="to-top" id="toTop" aria-label="Back to top">↑</button>
+
 <footer>
-  <p>© 2026 Goitsemang Baloyi — Data Scientist & BI Student · Pretoria, Gauteng</p>
-  <p>goitsemangflorence@gmail.com · (+27) 079 629 5517</p>
+  <div>
+    <p>© 2026 Goitsemang Baloyi — Data Scientist & BI Student · Pretoria, Gauteng</p>
+    <p>goitsemangflorence@gmail.com · (+27) 079 629 5517</p>
+  </div>
+  <div style="display:flex;gap:1.25rem;">
+    <a href="https://linkedin.com/in/goitsemang-baloyi" target="_blank" aria-label="LinkedIn" style="color:var(--muted);transition:color .2s;" onmouseover="this.style.color='var(--teal2)'" onmouseout="this.style.color='var(--muted)'"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+    <a href="https://github.com/G-Baloyi" target="_blank" aria-label="GitHub" style="color:var(--muted);transition:color .2s;" onmouseover="this.style.color='var(--teal2)'" onmouseout="this.style.color='var(--muted)'"><svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.374 0 0 5.373 0 12c0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/></svg></a>
+    <a href="mailto:goitsemangflorence@gmail.com" aria-label="Email" style="color:var(--muted);transition:color .2s;" onmouseover="this.style.color='var(--teal2)'" onmouseout="this.style.color='var(--muted)'"><svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg></a>
+  </div>
 </footer>
 
 <script>
@@ -591,6 +773,49 @@ const cObs=new IntersectionObserver(entries=>{
   });
 },{threshold:.5});
 document.querySelectorAll('[data-target]').forEach(c=>cObs.observe(c));
+/* THEME TOGGLE — kept in-memory for this session.
+   For a live deployment, swap the two commented lines below to persist
+   the choice across visits with localStorage. */
+const themeBtn=document.getElementById('themeToggle');
+const root=document.documentElement;
+// let saved = localStorage.getItem('theme'); if(saved) root.setAttribute('data-theme', saved);
+themeBtn.addEventListener('click',()=>{
+  const isLight=root.getAttribute('data-theme')==='light';
+  root.setAttribute('data-theme', isLight?'dark':'light');
+  themeBtn.textContent = isLight ? '☽' : '☀';
+  // localStorage.setItem('theme', isLight?'dark':'light');
+});
+
+/* MOBILE NAV */
+const burger=document.getElementById('navBurger'),navLinks=document.getElementById('navLinks');
+burger.addEventListener('click',()=>{
+  const open=navLinks.classList.toggle('open');
+  burger.classList.toggle('open',open);
+  burger.setAttribute('aria-expanded',open);
+});
+navLinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{
+  navLinks.classList.remove('open');burger.classList.remove('open');burger.setAttribute('aria-expanded',false);
+}));
+
+/* BACK TO TOP */
+const toTop=document.getElementById('toTop');
+window.addEventListener('scroll',()=>toTop.classList.toggle('show',scrollY>600));
+toTop.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+
+/* ROTATING ROLE TEXT IN HERO EYEBROW */
+const roles=['Data Scientist','Business Intelligence Specialist','Machine Learning Engineer','Data Analyst','SQL Developer'];
+const eyebrow=document.getElementById('eyebrowText');
+const reduceMotion=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if(eyebrow && !reduceMotion){
+  let ri=0;
+  setInterval(()=>{
+    ri=(ri+1)%roles.length;
+    eyebrow.style.opacity=0;
+    setTimeout(()=>{eyebrow.textContent=roles[ri];eyebrow.style.opacity=1;},350);
+  },2800);
+  eyebrow.style.transition='opacity .35s ease';
+}
+
 const terms=['0.94','XGB','SQL','BI','ML','ETL','DWH','SHAP','R²','CLV','3NF','RBAC','EDA','AUC','KPI','ROC'];
 const pc=document.getElementById('particles');
 for(let i=0;i<16;i++){
@@ -600,6 +825,156 @@ for(let i=0;i<16;i++){
   p.style.animationDelay=Math.random()*6+'s';p.style.animationDuration=(5+Math.random()*5)+'s';
   pc.appendChild(p);
 }
+
+/* PROJECT CASE STUDIES */
+const projectData = {
+  fraud: {
+    tag: 'PYTHON · MACHINE LEARNING', title: 'Bank Transaction Fraud Detection System',
+    img: 'images/project-fraud-detection.png',
+    tags: ['Python','XGBoost','SHAP','SMOTE','Scikit-Learn','Pandas'],
+    problem: "Financial fraud costs banks and customers real money, and most of it hides inside enormous transaction volumes that no human team can review line by line. The brief I set myself was to build a system that could flag fraudulent transactions automatically, explain why each one was flagged, and translate that into a workflow a bank's risk team could actually use.",
+    approach: [
+      'Data Preparation & EDA — profiled 200,000 transactions, checked class imbalance, and explored fraud rates across device type, transaction type, merchant category, and time of day.',
+      'Feature Engineering — built time-based features (hour, day of week, month), behavioural flags (is-night, is-weekend, is-rush-hour), and ratio/log-transform features (amount-to-balance, log-amount).',
+      'Model Training — trained Logistic Regression, Random Forest, and XGBoost on SMOTE-balanced data and compared them on AUC-ROC, F1, precision, and recall.',
+      'Threshold Optimisation & CV — swept decision thresholds from 0.05–0.95 to maximise F1, then ran 5-fold stratified cross-validation to confirm the result wasn\u2019t a fluke.',
+      'SHAP Explainability — used SHAP TreeExplainer to show which features drove each individual prediction, not just the model overall.',
+      'Risk Scoring Dashboard — scored every transaction and sorted it into four risk tiers, each tied to a concrete business action.'
+    ],
+    results: [
+      {v:'200K', l:'Transactions'}, {v:'3', l:'Models Compared'}, {v:'6', l:'Pipeline Stages'}, {v:'4', l:'Risk Tiers'}
+    ],
+    insights: [
+      'XGBoost came out ahead of Logistic Regression and Random Forest on AUC-ROC and F1 after threshold tuning.',
+      'Transaction amount, amount-to-balance ratio, hour of transaction, and account balance were consistently the strongest fraud signals under SHAP.',
+      'Every flagged transaction comes with an individual explanation, not just a score — a requirement for any real compliance workflow.',
+      'Business rules are tied directly to the four risk tiers (auto-approve → block & investigate), so the model output plugs straight into an approval pipeline.'
+    ],
+    github: 'https://github.com/G-Baloyi/Bank-Transaction-Fraud-Detection-System', live: null
+  },
+  churn: {
+    tag: 'PYTHON · MACHINE LEARNING', title: 'Bank Customer Churn & CLV Prediction',
+    img: 'images/project-churn.png',
+    tags: ['Python','XGBoost','SHAP','Random Forest','Ridge Regression'],
+    problem: "Losing a customer is expensive, but not every customer is worth saving at the same cost. Retail banks need to know two things at once — who's about to leave, and how valuable they are — so retention budget goes to the customers where it matters most, instead of being spread evenly across everyone.",
+    approach: [
+      'Feature Engineering — derived five features: BalancePerProduct, EngagementScore, AgeGroup, TenureGroup, and CreditBand.',
+      'Churn Classification — trained Logistic Regression, a 200-tree Random Forest, and XGBoost (with scale_pos_weight for imbalance) to predict churn.',
+      'CLV Regression — trained Ridge Regression and a 200-estimator Gradient Boosting Regressor to estimate each customer\u2019s lifetime value.',
+      'SHAP Explainability — ran TreeExplainer on a 2,000-customer sample to surface global drivers of churn and value.',
+      'Retention Segmentation — combined both predictions into a 2×2 Risk × CLV matrix, splitting all 50,000 customers into four priority tiers for retention teams.'
+    ],
+    results: [
+      {v:'50K', l:'Customers'}, {v:'24.6%', l:'Churn Rate'}, {v:'2', l:'ML Targets'}, {v:'4', l:'Priority Tiers'}
+    ],
+    insights: [
+      'Priority 1 customers (high churn risk + high CLV) are the small group retention spend should hit first — that\u2019s the actual output a stakeholder can act on, not just a churn probability.',
+      'CLV across the customer base ranged from $0.20 to over $25,800, showing why a flat retention strategy would waste budget on low-value customers.',
+      'SHAP confirmed engagement and tenure-based features were as predictive as raw balance, which shaped the retention matrix design.'
+    ],
+    github: 'https://github.com/G-Baloyi/Bank-Customer-churn-and-CLV-Prediction', live: null
+  },
+  credit: {
+    tag: 'TABLEAU · BUSINESS INTELLIGENCE', title: 'Customer Credit Risk & Financial Behaviour Analysis',
+    img: 'images/project-credit-risk.png',
+    tags: ['Tableau','Feature Engineering','SQL','Data Storytelling'],
+    problem: "Lenders assess risk from two angles that usually live in separate systems: who a customer is (demographics, credit history) and what they actually do with their money (transaction behaviour). Looked at separately, both pictures are incomplete. The goal was to merge them into one view a loan officer or portfolio manager could actually use.",
+    approach: [
+      'Data Integration — merged the German Credit Dataset (1,000 customers, demographics + risk label) with a 50,000-row bank transaction dataset, aggregated to customer level in Excel, then joined in Tableau on a shared CustomerID.',
+      'Feature Engineering — built Net Cash Flow, Transaction Volatility, Credit Intensity, a composite Customer Risk Score, and a binary Risk Flag.',
+      'Dashboard Design — built two interactive Tableau dashboards covering risk drivers, financial behaviour, segmentation, and loan decision support, with filters for Age Group, Housing Status, and Sex.'
+    ],
+    results: [
+      {v:'1,000', l:'Customers'}, {v:'2', l:'Live Dashboards'}, {v:'5', l:'Engineered Features'}, {v:'6', l:'Core Analyses'}
+    ],
+    insights: [
+      'Loan size, duration, and credit intensity were the strongest predictors of repayment stress in the data.',
+      'Transaction volatility and net cash flow surfaced high-risk customers that credit history alone missed.',
+      'Filterable, published dashboards mean a stakeholder can explore segments themselves instead of waiting on a fixed report.'
+    ],
+    github: 'https://github.com/G-Baloyi/Customer-Credit-Risk-and-Financial-Behavior-Analysis',
+    live: 'https://g-baloyi.github.io/Customer-Credit-Risk-and-Financial-Behavior-Analysis/'
+  },
+  soyez: {
+    tag: 'SQL · DATABASE DESIGN', title: 'Soyez Jolie Salon Database System',
+    img: 'images/project-soyez-jolie.png',
+    tags: ['SQL Server','T-SQL','Triggers','RBAC','3NF'],
+    problem: "Soyez Jolie, a boutique salon in Eastgate, Johannesburg, was running appointments, payments, staff, and stock entirely on manual records — which meant double bookings, no audit trail, and no way to report on the business. The brief was to design a proper relational backend that a real salon could run on.",
+    approach: [
+      'Schema Design — modelled customers, employees, services, appointments, payments, products, and feedback, normalised to Third Normal Form (3NF).',
+      'Business Logic — wrote stored procedures to automate common operations like booking and payment processing.',
+      'Automation & Integrity — added triggers for stock updates and audit logging, plus constraints to enforce data integrity.',
+      'Performance — added indexes on frequently queried columns to keep reporting fast as data grows.',
+      'Security — implemented role-based access control (RBAC) through SQL Server logins and roles, so staff only see what their role needs.'
+    ],
+    results: [
+      {v:'3NF', l:'Normalised'}, {v:'15+', l:'Tables'}, {v:'RBAC', l:'Security Layer'}, {v:'0', l:'Double Bookings'}
+    ],
+    insights: [
+      'Full normalisation eliminated redundant data and the update anomalies that come with it.',
+      'Triggers and audit logging give the business owner a real paper trail — something the manual system never had.',
+      'Designing enterprise features (RBAC, audit logs, stored procedures) for a small business shows the schema scales past the original brief.'
+    ],
+    github: 'https://github.com/G-Baloyi/SoyezJolie-Database-System', live: null
+  },
+  superstore: {
+    tag: 'PYTHON · TIME-SERIES FORECASTING', title: 'Superstore Sales Forecasting',
+    img: 'images/project-extra.png',
+    tags: ['Python','Time-Series','Random Forest','Gradient Boosting','Feature Engineering'],
+    problem: "Retail teams need to plan inventory and staffing around future demand, but raw historical order data isn't a forecast — it needs structure. The goal was to turn Superstore's order history into a working monthly sales forecast, and to be honest about which model actually earns its complexity.",
+    approach: [
+      'Feature Engineering — built 8 time-series features: lag variables, rolling averages, and cyclic month encoding to capture seasonality without leaking future data.',
+      'Model Comparison — trained and compared Linear Regression, Random Forest, and Gradient Boosting on the same feature set.',
+      'Evaluation — measured actual-vs-predicted performance and inspected feature importance to see what was actually driving the forecast.',
+      'Reporting — compiled findings into an executive report covering seasonality, category/region breakdowns, and profit margin.'
+    ],
+    results: [
+      {v:'8', l:'Engineered Features'}, {v:'3', l:'Models Compared'}, {v:'90%', l:'Accuracy'}, {v:'12mo', l:'Forecast Window'}
+    ],
+    insights: [
+      'Tree-based models (Random Forest, Gradient Boosting) captured seasonal, non-linear demand patterns that plain Linear Regression missed.',
+      'Category and region mix moved the forecast more than the raw month-over-month trend did.',
+      'Keeping the feature set to 8 well-chosen variables kept the model interpretable enough to explain to a non-technical stakeholder.'
+    ],
+    github: 'https://github.com/G-Baloyi/Superstore_Sales_Forecast', live: null
+  }
+};
+
+const modalOverlay = document.getElementById('caseStudyModal');
+const modalBox = document.getElementById('modalBox');
+let lastFocusedEl = null;
+
+function openCaseStudy(key){
+  const p = projectData[key];
+  if(!p) return;
+  lastFocusedEl = document.activeElement;
+  modalBox.innerHTML = `
+    <button class="modal-close" onclick="closeCaseStudy()" aria-label="Close case study">✕</button>
+    <p class="modal-tag" id="modalTitle">${p.tag}</p>
+    <h3 class="modal-title">${p.title}</h3>
+    <img src="${p.img}" alt="${p.title} screenshot" class="modal-img" onerror="this.style.display='none'">
+    <div class="modal-tags">${p.tags.map(t=>`<span class="ptag">${t}</span>`).join('')}</div>
+    <div class="modal-section"><h4>Problem Statement</h4><p>${p.problem}</p></div>
+    <div class="modal-section"><h4>Approach</h4><ul class="modal-list">${p.approach.map(a=>`<li>${a}</li>`).join('')}</ul></div>
+    <div class="modal-section"><h4>Results & Impact</h4><div class="modal-metrics">${p.results.map(r=>`<div class="modal-metric"><div class="modal-metric-val">${r.v}</div><div class="modal-metric-label">${r.l}</div></div>`).join('')}</div></div>
+    <div class="modal-section"><h4>Key Insights</h4><ul class="modal-list">${p.insights.map(i=>`<li>${i}</li>`).join('')}</ul></div>
+    <div class="modal-links">
+      <a href="${p.github}" target="_blank" class="proj-link">View on GitHub →</a>
+      ${p.live ? `<a href="${p.live}" target="_blank" class="proj-link">Live Dashboards →</a>` : ''}
+    </div>
+  `;
+  modalOverlay.classList.add('open');
+  document.body.style.overflow='hidden';
+  modalOverlay.querySelector('.modal-close').focus();
+  if(typeof trackEvent==='function') trackEvent('projects','view_case_study', p.title);
+}
+function closeCaseStudy(){
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow='';
+  if(lastFocusedEl) lastFocusedEl.focus();
+}
+modalOverlay.addEventListener('click', e=>{ if(e.target===modalOverlay) closeCaseStudy(); });
+document.addEventListener('keydown', e=>{ if(e.key==='Escape' && modalOverlay.classList.contains('open')) closeCaseStudy(); });
 </script>
 </body>
 </html>
