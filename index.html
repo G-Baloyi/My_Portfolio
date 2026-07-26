@@ -9,23 +9,27 @@
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Mono:wght@300;400&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
 
 <script>
-  window.GA_MEASUREMENT_ID = "G-2KFCCX6JD3"; 
-</script>
-<script>
-(function(){
-  if(window.GA_MEASUREMENT_ID === "GA_MEASUREMENT_ID") return; // not configured yet — skip loading
-  var s=document.createElement('script');
-  s.async=true; s.src="https://www.googletagmanager.com/gtag/js?id="+window.GA_MEASUREMENT_ID;
+  window.GA_MEASUREMENT_ID = "G-2KFCCX6JD3";
+  
+  // Load Google Analytics
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = "https://www.googletagmanager.com/gtag/js?id=" + window.GA_MEASUREMENT_ID;
   document.head.appendChild(s);
+  
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag(){ dataLayer.push(arguments); }
   window.gtag = gtag;
+  
   gtag('js', new Date());
   gtag('config', window.GA_MEASUREMENT_ID);
-})();
-function trackEvent(category, action, label){
-  if(typeof gtag === 'function'){ gtag('event', action, {event_category: category, event_label: label}); }
-}
+  
+  // Optional: Helper function for tracking custom events
+  function trackEvent(category, action, label){
+    if(typeof gtag === 'function'){
+      gtag('event', action, {event_category: category, event_label: label});
+    }
+  }
 </script>
 <style>
 :root{
